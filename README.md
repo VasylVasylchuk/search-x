@@ -1,70 +1,46 @@
-# Getting Started with Create React App
+# Search X
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Your task is to implement the basics of a search engine client using ReactJS. You don’t need to go into details, the must-have requirements are:
 
-## Available Scripts
+- You need an input where you can type.
+- The input should support auto-completion.
+- You need to show all the results (list of results) on selection (by clicking on a result item or by pressing the Enter key).
 
-In the project directory, you can run:
+The points above are similar to Google search behaviour but really far from the real complex one, you can follow their behaviour if you want (not needed to be the same, just a simple version).
 
-### `npm start`
+## Search autocomplete feature:
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- By typing you need to check your local DB (feel free to hardcode some data and use it as a fake/local DB) for entries whose title starts with the value of the input and then render all of them like on the screenshot below (You don’t need to highlight/bold the letters).
+- In addition, you need to indicate which of the autocompleted items are already in your search history (recently searched items), please check the first item of the results autocompletion.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+### Notice:
 
-### `npm test`
+- Once the screen loads you need to auto-focus the search input.
+- Once you focus out the input you’ve to close (hide) the list with the autocompleted items BUT you still need to keep the items in your memory (just hide the list).
+- Once you focus the input you need to check if there are autocomplete items in memory and if yes then you need to show them like in the screenshot above.
+- You have to limit the autocomplete items to a maximum of 10 rows/elements.
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Take a look also that there is a “Remove” / ”Премахване” button – by clicking it you have to remove the relevant item from your search history, the item colour should change from purple to black/dark because the item won’t be in your search history anymore.
 
-### `npm run build`
+## Results list feature:
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Once you select an item from the autocomplete shown on the previous screenshot OR press enter, you need to take the input value/text and check again your DB for items whose title contains the value/text.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Mandatory data to render is:
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- Keep the search input (you are still able to type and perform a new search).
+- Result metadata (below the search input it tells you how many results you have and how long it takes to perform the search).
+- A list of results where each result has:
+  - Title (which is a clickable real link/URL)
+  - Description
 
-### `npm run eject`
+## Instructions:
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- Please use git and push all your code to a remote git provider (GitHub/Bitbucket), make sure that the repository is public so the source would be free for read/download.
+- You are not allowed to use 3rd parties for the search/auto-completion.
+- You must implement the components on your own, do not use 3rd parties like MUI, Bootstrap, etc.
+- Please avoid ES6 classes and try to use React hooks and Context API.
+- Feel free to use a real database/storage if you want.
+- Everything which extends the must-have requirements (like pagination, real data base) and is close to Google search behaviour will be considered a bonus.
+- The UI should follow the screenshots (as a design) but is not needed to be perfect, however, good styling would be considered as a bonus.
+- All the screen elements not mentioned in the requirements (like the microphone icon for voice search) are not mandatory.
