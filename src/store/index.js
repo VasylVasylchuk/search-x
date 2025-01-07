@@ -6,6 +6,7 @@ export const ActionTypes = Object.freeze({
   REMOVE_FROM_SEARCH_HISTORY: "REMOVE_FROM_SEARCH_HISTORY",
   SET_RESULTS: "SET_RESULTS",
   SHOW_AUTOCOMPLETE: "SHOW_AUTOCOMPLETE",
+  SET_AUTOCOMPLETE_ITEMS: "SET_AUTOCOMPLETE_ITEMS",
 });
 
 const initialState = {
@@ -17,34 +18,31 @@ const initialState = {
   searchTime: 0,
 };
 
-export function searchReducer(state, action) {
+const searchReducer = (state, action) => {
   switch (action.type) {
     case ActionTypes.SET_SEARCH_TERM:
       return { ...state, searchTerm: action.payload };
-    case ActionTypes.REMOVE_FROM_SEARCH_HISTORY: {
-      const searchHistory = state.searchHistory.filter(
-        (item) => item.title !== action.payload
-      );
-
+    
+    case ActionTypes.REMOVE_FROM_SEARCH_HISTORY:
       return {
         ...state,
-        searchHistory,
+        searchHistory: state.searchHistory.filter(
+          (item) => item.title !== action.payload
+        ),
       };
-    }
-    case ActionTypes.SET_RESULTS: {
-      const start = new Date();
-
+    
+    case ActionTypes.SET_RESULTS:
       const searchTerm = state.searchTerm.toLowerCase();
+      const start = new Date();
       const results = mockDB.filter((item) =>
         item.title.toLowerCase().includes(searchTerm)
       );
-      const searchHistory = [...state.searchHistory];
-      if (!searchHistory.includes(searchTerm)) {
-        searchHistory.push({
-          title: searchTerm,
-          isHistory: true
-        });
-      }
+
+      const searchHistory = state.searchHistory.some(
+        (item) => item.title === searchTerm
+      )
+        ? [...state.searchHistory]
+        : [{ title: searchTerm, isHistory: true }, ...state.searchHistory];
 
       return {
         ...state,
@@ -53,25 +51,26 @@ export function searchReducer(state, action) {
         searchTime: new Date() - start,
         showAutocomplete: false,
       };
-    }
+
     case ActionTypes.SET_AUTOCOMPLETE_ITEMS:
       const autocompleteItems = [
         ...state.searchHistory.filter((item) =>
           item.title.toLowerCase().startsWith(state.searchTerm.toLowerCase())
         ),
-        ...mockDB
-          .filter((item) =>
-            item.title.toLowerCase().startsWith(state.searchTerm.toLowerCase())
-          )
+        ...mockDB.filter((item) =>
+          item.title.toLowerCase().startsWith(state.searchTerm.toLowerCase())
+        ),
       ].slice(0, 10);
 
       return { ...state, autocompleteItems };
+    
     case ActionTypes.SHOW_AUTOCOMPLETE:
       return { ...state, showAutocomplete: action.payload };
+
     default:
       return state;
   }
-}
+};
 
 export const SearchContext = createContext(null);
 
