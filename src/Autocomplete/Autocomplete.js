@@ -20,9 +20,9 @@ const Autocomplete = () => {
     });
   };
 
-  // if (!state.showAutocomplete || !state.autocompleteItems?.length) {
-  //   return null;
-  // }
+  if (!state.showAutocomplete || !state.autocompleteItems?.length) {
+    return null;
+  }
 
   return (
     <ul className={styles.autocompleteList}>
