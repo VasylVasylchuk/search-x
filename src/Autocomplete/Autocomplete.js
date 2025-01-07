@@ -28,7 +28,7 @@ const Autocomplete = () => {
     <ul className={styles.autocompleteList}>
       {state.autocompleteItems.map((item) => (
         <li
-          key={item.item}
+          key={item.id && item.item}
           className={`${styles.autocompleteItem} ${
             item.isHistory && styles.purple
           }
